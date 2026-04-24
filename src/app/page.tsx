@@ -7,6 +7,7 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/navbar";
+import { Hero, FeaturedProjects, Skills } from "@/components/sections";
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -111,23 +112,13 @@ export default function Home() {
         </div>
       </main>
 
-      <main
-        id="projects"
-        className="flex h-screen w-full items-center justify-center bg-amber-800 px-6 text-white"
-      >
-        <div className="text-center">
-          <h2 className="text-4xl font-semibold md:text-6xl">Projects</h2>
-          <p className="mt-4 text-lg text-amber-100 md:text-xl">
-            Smooth scrolling is powered by GSAP ScrollToPlugin.
-          </p>
-          <Button
-            className="mt-8 bg-white text-amber-900 hover:bg-amber-100"
-            onClick={() => scrollToSection("contact")}
-          >
-            Go to Contact
-          </Button>
-        </div>
-      </main>
+      <section id="projects">
+        <FeaturedProjects />
+      </section>
+
+      <section id="skills">
+        <Skills />
+      </section>
 
       <main
         id="contact"
@@ -136,10 +127,10 @@ export default function Home() {
         <div className="text-center">
           <h2 className="text-4xl font-semibold md:text-6xl">Contact</h2>
           <p className="mt-4 text-lg text-blue-100 md:text-xl">
-            Hero text is animated with a GSAP timeline on initial load.
+            Have a project in mind? Let's work together.
           </p>
           <Button className="mt-8 bg-white text-blue-900 hover:bg-blue-100" onClick={() => scrollToSection("hero")}>
-            Back to Hero
+            Back to Top
           </Button>
         </div>
       </main>
