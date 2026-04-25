@@ -2,19 +2,25 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/* ─────────────────────────────────────────────────────────────
+   Theme toggle variant — toggled via next-themes on <html>
+   ───────────────────────────────────────────────────────────── */
 @custom-variant dark (&:is(.dark *));
+
 html,
 body {
   min-height: 100%;
 }
 
-
+/* ─────────────────────────────────────────────────────────────
+   Tailwind v4 theme bridge
+   ───────────────────────────────────────────────────────────── */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
+  --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-geist-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -53,83 +59,185 @@ body {
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   🌕  LIGHT THEME — "Warm Professional"
+   Brand accent: Electric Violet #7C3AED
+   Base: Warm off-white. Cards: Pure white. Text: Slate-black.
+   Inspired by: mdsaban.com + v0-invoice-copilot-zeta.vercel.app
+   ═══════════════════════════════════════════════════════════════ */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  /* Base surfaces */
+  --background: oklch(0.98 0.004 82);         /* Warm off-white */
+  --foreground: oklch(0.13 0.015 290);         /* Deep slate with violet tint */
+
+  /* Cards */
+  --card: oklch(1 0 0);                        /* Pure white */
+  --card-foreground: oklch(0.16 0.01 290);
+
+  /* Popover */
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
+  --popover-foreground: oklch(0.16 0.01 290);
+
+  /* Primary — Electric Violet #7C3AED */
+  --primary: oklch(0.55 0.26 290);
+  --primary-foreground: oklch(1 0 0);
+
+  /* Secondary — light violet wash */
+  --secondary: oklch(0.95 0.018 290);
+  --secondary-foreground: oklch(0.4 0.2 290);
+
+  /* Muted */
+  --muted: oklch(0.96 0.006 290);
+  --muted-foreground: oklch(0.5 0.02 290);
+
+  /* Accent — soft violet tint */
+  --accent: oklch(0.94 0.022 290);
+  --accent-foreground: oklch(0.5 0.22 290);
+
+  /* Destructive */
+  --destructive: oklch(0.57 0.24 27);
+
+  /* Border / Input / Ring */
+  --border: oklch(0.9 0.006 82);              /* Warm light border */
+  --input: oklch(0.9 0.006 82);
+  --ring: oklch(0.55 0.26 290);               /* Violet focus ring */
+
+  /* Charts */
+  --chart-1: oklch(0.55 0.26 290);            /* Violet */
+  --chart-2: oklch(0.6 0.22 230);             /* Blue */
+  --chart-3: oklch(0.65 0.18 160);            /* Teal */
+  --chart-4: oklch(0.7 0.18 55);              /* Amber */
+  --chart-5: oklch(0.6 0.22 15);              /* Rose */
+
+  /* Border radius */
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+
+  /* Sidebar */
+  --sidebar: oklch(0.97 0.005 82);
+  --sidebar-foreground: oklch(0.2 0.01 290);
+  --sidebar-primary: oklch(0.55 0.26 290);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.94 0.022 290);
+  --sidebar-accent-foreground: oklch(0.5 0.22 290);
+  --sidebar-border: oklch(0.9 0.006 82);
+  --sidebar-ring: oklch(0.55 0.26 290);
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   🌑  DARK THEME — "Deep Space / Technical"
+   Brand accent: Electric Violet (brightened) — same family as light
+   Base: Near-black with subtle violet tint.
+   Inspired by: synapse-code-auditor.vercel.app
+   ═══════════════════════════════════════════════════════════════ */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* Base surfaces — near-black with a whisper of violet */
+  --background: oklch(0.07 0.012 290);         /* #0D0B12 — deep violet-black */
+  --foreground: oklch(0.96 0.006 290);          /* Near-white with violet tint */
+
+  /* Cards — lifted slightly from background */
+  --card: oklch(0.11 0.014 290);               /* #171320 */
+  --card-foreground: oklch(0.94 0.006 290);
+
+  /* Popover */
+  --popover: oklch(0.11 0.014 290);
+  --popover-foreground: oklch(0.94 0.006 290);
+
+  /* Primary — Electric Violet (bright, neon on dark) */
+  --primary: oklch(0.72 0.28 290);              /* #A855F7 — bright violet */
+  --primary-foreground: oklch(0.07 0 0);        /* Near-black text on bright violet */
+
+  /* Secondary — subtle dark violet layer */
+  --secondary: oklch(0.17 0.025 290);
+  --secondary-foreground: oklch(0.88 0.01 290);
+
+  /* Muted */
+  --muted: oklch(0.16 0.018 290);
+  --muted-foreground: oklch(0.52 0.025 290);    /* ~#888 with violet tint */
+
+  /* Accent — slightly elevated violet surface */
+  --accent: oklch(0.2 0.035 290);
+  --accent-foreground: oklch(0.72 0.28 290);    /* Violet text on violet surface */
+
+  /* Destructive */
+  --destructive: oklch(0.7 0.19 22);
+
+  /* Border / Input / Ring */
+  --border: oklch(1 0 0 / 8%);                /* Subtle white border */
+  --input: oklch(1 0 0 / 10%);
+  --ring: oklch(0.72 0.28 290);               /* Bright violet focus ring */
+
+  /* Charts */
+  --chart-1: oklch(0.72 0.28 290);            /* Bright Violet */
+  --chart-2: oklch(0.65 0.22 230);            /* Blue */
+  --chart-3: oklch(0.7 0.2 160);              /* Teal/Cyan */
+  --chart-4: oklch(0.75 0.18 55);             /* Amber */
+  --chart-5: oklch(0.68 0.22 15);             /* Rose */
+
+  /* Sidebar */
+  --sidebar: oklch(0.09 0.012 290);
+  --sidebar-foreground: oklch(0.88 0.008 290);
+  --sidebar-primary: oklch(0.72 0.28 290);
+  --sidebar-primary-foreground: oklch(0.07 0 0);
+  --sidebar-accent: oklch(0.17 0.025 290);
+  --sidebar-accent-foreground: oklch(0.88 0.01 290);
+  --sidebar-border: oklch(1 0 0 / 8%);
+  --sidebar-ring: oklch(0.72 0.28 290);
 }
 
+/* ─────────────────────────────────────────────────────────────
+   Base layer styles
+   ───────────────────────────────────────────────────────────── */
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
   }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Dark theme — subtle grid background (technical depth)
+   ───────────────────────────────────────────────────────────── */
+.dark body {
+  background-image:
+    linear-gradient(oklch(1 0 0 / 3%) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(1 0 0 / 3%) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Dark theme — radial violet glow (atmospheric depth, Synapse-style)
+   ───────────────────────────────────────────────────────────── */
+.dark body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, oklch(0.55 0.28 290 / 20%) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 30% at 90% 90%, oklch(0.72 0.28 290 / 8%) 0%, transparent 60%);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Smooth theme transitions — everything fades gracefully
+   ───────────────────────────────────────────────────────────── */
+html {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
 }

@@ -4,15 +4,15 @@ import { useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { ThemeToggle } from "@/components/shared/theme-toggle";
 
 gsap.registerPlugin(ScrollToPlugin);
 
 const navItems = [
-  { label: "Products", target: "projects" },
-  { label: "Services", target: "projects" },
-  { label: "Apps", target: "projects" },
-  { label: "Pricing", target: "contact" },
+  { label: "Work", target: "projects" },
+  { label: "Skills", target: "skills" },
   { label: "About", target: "hero" },
+  { label: "Contact", target: "contact" },
 ];
 
 export default function Navbar() {
@@ -31,19 +31,22 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-zinc-200/80 bg-white/85 backdrop-blur">
+    <nav className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4 md:px-10">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="grid size-9 place-items-center rounded-xl bg-zinc-950 text-sm font-bold text-white">
+
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <span className="grid size-9 place-items-center rounded-xl bg-primary text-primary-foreground text-sm font-bold transition-transform group-hover:scale-105">
             M
           </span>
-          <span className="text-sm font-semibold tracking-wide text-zinc-800">
+          <span className="text-sm font-semibold tracking-wide text-foreground/90">
             Mayank Developer
           </span>
         </Link>
 
-        <div className="hidden items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 p-1 md:flex">
-          {navItems.map((item, index) => (
+        {/* Desktop nav links */}
+        <div className="hidden items-center gap-1 rounded-full border border-border/60 bg-muted/50 p-1 md:flex">
+          {navItems.map((item) => (
             <Link
               key={item.label}
               href={`#${item.target}`}
@@ -51,69 +54,77 @@ export default function Navbar() {
                 event.preventDefault();
                 handleNavClick(item.target);
               }}
-              className={`rounded-full px-4 py-1.5 text-sm transition-colors ${
-                index === 0
-                  ? "border border-zinc-200 bg-white font-medium text-zinc-800"
-                  : "text-zinc-500 hover:text-zinc-700"
-              }`}
+              className="rounded-full px-4 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground hover:bg-background/80"
             >
               {item.label}
             </Link>
           ))}
         </div>
 
-        <button
-          onClick={() => handleNavClick("contact")}
-          className="hidden items-center gap-2.5 rounded-full bg-linear-to-r from-zinc-950 to-zinc-500 py-2 pl-5 pr-2 text-sm font-medium text-zinc-50 transition-colors hover:text-zinc-200 md:flex"
-        >
-          Get started
-          <span className="grid size-7 place-items-center rounded-full bg-white text-zinc-700">
-            <svg
-              width="12"
-              height="10"
-              viewBox="0 0 12 10"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M.6 4.602h10m-4-4 4 4-4 4"
-                stroke="currentColor"
-                strokeWidth="1.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </span>
-        </button>
+        {/* Desktop right actions */}
+        <div className="hidden items-center gap-2 md:flex">
+          {/* Theme Toggle */}
+          <ThemeToggle />
 
-        <button
-          onClick={() => setMenuOpen((prev) => !prev)}
-          className="flex flex-col gap-1.5 p-1 md:hidden"
-          aria-label="Toggle menu"
-          aria-expanded={menuOpen}
-        >
-          <span
-            className={`block h-0.5 w-6 bg-zinc-800 transition-transform ${
-              menuOpen ? "translate-y-2 rotate-45" : ""
-            }`}
-          />
-          <span
-            className={`block h-0.5 w-6 bg-zinc-800 transition-opacity ${
-              menuOpen ? "opacity-0" : ""
-            }`}
-          />
-          <span
-            className={`block h-0.5 w-6 bg-zinc-800 transition-transform ${
-              menuOpen ? "-translate-y-2 -rotate-45" : ""
-            }`}
-          />
-        </button>
+          {/* CTA */}
+          <button
+            onClick={() => handleNavClick("contact")}
+            className="flex items-center gap-2.5 rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground transition-all duration-200 hover:opacity-90 hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            Hire me
+            <span className="grid size-6 place-items-center rounded-full bg-primary-foreground/15">
+              <svg
+                width="10"
+                height="9"
+                viewBox="0 0 12 10"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M.6 4.602h10m-4-4 4 4-4 4"
+                  stroke="currentColor"
+                  strokeWidth="1.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+
+        {/* Mobile: Theme toggle + hamburger */}
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            onClick={() => setMenuOpen((prev) => !prev)}
+            className="flex flex-col gap-1.5 p-1"
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+          >
+            <span
+              className={`block h-0.5 w-6 bg-foreground transition-transform ${
+                menuOpen ? "translate-y-2 rotate-45" : ""
+              }`}
+            />
+            <span
+              className={`block h-0.5 w-6 bg-foreground transition-opacity ${
+                menuOpen ? "opacity-0" : ""
+              }`}
+            />
+            <span
+              className={`block h-0.5 w-6 bg-foreground transition-transform ${
+                menuOpen ? "-translate-y-2 -rotate-45" : ""
+              }`}
+            />
+          </button>
+        </div>
       </div>
 
+      {/* Mobile menu */}
       {menuOpen && (
-        <div className="border-t border-zinc-200 bg-white px-6 py-5 md:hidden">
-          <div className="mx-auto flex w-full max-w-6xl flex-col gap-2">
-            {navItems.map((item, index) => (
+        <div className="border-t border-border/60 bg-background/95 backdrop-blur-md px-6 py-5 md:hidden">
+          <div className="mx-auto flex w-full max-w-6xl flex-col gap-1">
+            {navItems.map((item) => (
               <Link
                 key={item.label}
                 href={`#${item.target}`}
@@ -121,11 +132,7 @@ export default function Navbar() {
                   event.preventDefault();
                   handleNavClick(item.target);
                 }}
-                className={`rounded-lg px-4 py-2.5 text-sm ${
-                  index === 0
-                    ? "bg-zinc-100 font-medium text-zinc-800"
-                    : "text-zinc-600 hover:bg-zinc-50"
-                }`}
+                className="rounded-lg px-4 py-2.5 text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
               >
                 {item.label}
               </Link>
@@ -133,26 +140,9 @@ export default function Navbar() {
 
             <button
               onClick={() => handleNavClick("contact")}
-              className="mt-3 flex w-fit items-center justify-center gap-2.5 rounded-full bg-linear-to-r from-zinc-950 to-zinc-500 px-5 py-2.5 text-sm font-medium text-zinc-50"
+              className="mt-3 flex w-fit items-center gap-2.5 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground"
             >
-              Get started
-              <span className="grid size-7 place-items-center rounded-full bg-white text-zinc-700">
-                <svg
-                  width="12"
-                  height="10"
-                  viewBox="0 0 12 10"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M.6 4.602h10m-4-4 4 4-4 4"
-                    stroke="currentColor"
-                    strokeWidth="1.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </span>
+              Hire me
             </button>
           </div>
         </div>
